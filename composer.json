@@ -1,0 +1,24 @@
+{
+    "name": "dginer/frameworkphp",
+    "description": "Proyecto realizado por la DGIn",
+    "type": "project",
+    "minimum-stability": "stable",
+    "require": {
+        "league/plates": "^3.3",
+        "symfony/dotenv": "^3.4",
+        "firebase/php-jwt": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/core",
+            "App\\": "app/",
+            "App\\Model\\": "app/models",
+            "App\\View\\": "app/views",
+            "App\\Controller\\": "app/controllers",
+            "App\\Middleware\\": "app/middlewares"
+        }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.4"
+    }
+}

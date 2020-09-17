@@ -1,0 +1,318 @@
+
+html, body {
+  width:100vw;
+  height:100vh;
+  font-family: 'Open Sans'; 
+}
+
+/* @font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Regular.ttf');
+} */
+
+.abs-abajo-login {
+  display: flex;
+  align-items: flex-end;  
+  min-height: 30vh;
+}
+
+.abs-medio-login {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;  
+  background-color: rgb(68, 64, 64)!important;
+  color: white;
+}
+
+
+.card-body-fluid{
+	padding-bottom: 5px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(23, 162, 184, 0.26);
+}
+
+.captcha-error{
+    background-color : #f7b9b9;
+}
+
+.captcha-ok{
+    background-color :  #a1f5a6;
+}
+
+.menu-verde{
+  background-color: #799F4F ;
+}
+
+.nav-link {
+  color: white;
+}
+
+.navbar-nav .nav-link {
+  color: white;
+}
+
+.nav_link_color {
+  color: black;
+}
+
+
+.GrisExtraGrande {
+  font-size : 2.2em; 
+  color : #545454;
+  font-weight : bold;  
+}
+
+.GrisGrande {
+  font-size : 1.2em; 
+  color : #545454;
+}
+
+.GrisMedio {
+  font-size : 1em; 
+  color : #545454;
+}
+
+.WhiteMedio {
+  font-size : 1em; 
+  color : white;
+}
+
+.GrisChico {
+  font-size : 0.8em; 
+  color : #545454;
+}
+
+.NegroExtraGrande {
+  font-size : 2.2em; 
+  color : #000000;
+  font-weight : bold;  
+}
+
+.NegroGrande {
+  font-size : 1.2em; 
+  color : #000000;
+}
+
+.NegroMedio {
+  font-size : 1em; 
+  color : #000000;
+}
+
+.NegroChico {
+  font-size : 0.8em; 
+  color : #000000;
+}
+
+.BlancoExtraGrande {
+  font-size : 2.2em; 
+  color : #FFFFFF;
+  font-weight : bold;  
+}
+
+.BlancoGrande {
+  font-size : 1.2em; 
+  color : #FFFFFF;
+}
+
+.BlancoMedio {
+  font-size : 1em; 
+  color : #FFFFFF;
+}
+
+.BlancoChico {
+  font-size : 0.8em; 
+  color : #FFFFFF;
+}
+
+.AzulChicoBtb {
+  font-size : 0.8em; 
+  color : #006699;
+}
+
+
+.fondoAzul{
+  background-color: #006699;
+}
+
+.fondoGris{
+  background-color: #cccccc ;
+}
+
+.fondoVioleta{
+  background-color: #62a4f3;
+}
+
+.fondoBlanco{
+  background-color: #FFFFFF ;
+}
+
+
+
+.vwh-100{
+  width:100vw;
+  height:100vh;
+}
+
+
+@media (max-width: 768px) { 
+.vwh-100{      
+  width: 100%;
+  height:auto;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+.fondo { 
+ 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: peachpuff;
+  
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(68, 64, 64)!important;
+  color: white;
+  text-align: center;
+}
+
+.top {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color:  #343a40!important;
+  color: white;
+  text-align: center;
+  padding: 8px
+}
+
+.card-body-fluid{
+	padding-bottom: 5px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(23, 162, 184, 0.26);
+}
+
+.captcha-error{
+    background-color : #f7b9b9;
+}
+
+.captcha-ok{
+    background-color :  #a1f5a6;
+}
+
+.menu-verde{
+  background-color: #799F4F ;
+}
+
+.nav-link {
+  color: white;
+}
+
+.navbar-nav .nav-link {
+  color: white;
+}
+
+.nav_link_color {
+  color: black;
+}
+
+.fuenteBlanca10Negrita {
+  font-family: Verdana;
+  font-size : 0.9em; 
+  color : #FFFFFF; 
+  font-weight : bold; 
+  text-align: left; 
+}
+
+.fuenteBlanca12Negrita {
+  font-family: Verdana;
+  font-size : 1em; 
+  color : #FFFFFF; 
+  font-weight : bold; 
+  text-align: left; 
+}
+
+.fuenteBlanca10 {
+  font-family: Verdana;
+  font-size : 0.9em; 
+  color : #FFFFFF;  
+  text-align: left; 
+}
+
+.fuenteBlanca12 {
+  font-family: Verdana;
+  font-size : 1em; 
+  color : #FFFFFF;  
+  text-align: left; 
+}
+
+.fondoAzul{
+  background-color: #006699;
+}
+
+.fuenteAzul12Negrita {
+  font-family: Verdana;
+  font-size : 1em; 
+  color : #006699; 
+  font-weight : bold; 
+  text-align: left; 
+}
+
+.fuenteAzul12NegritaCentrado {
+  font-family: Verdana;
+  font-size : 1em; 
+  color : #006699; 
+  font-weight : bold; 
+  text-align: center; 
+}
+
+.btn-primary{
+  background-color: #006699;
+  border-color: #006699;
+}
+
+*/
