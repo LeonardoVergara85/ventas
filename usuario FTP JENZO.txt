@@ -1,6 +1,0 @@
-ip ftp = ftp://92.249.44.220
-hostname = ftp://jenzodistribuciones.com 
-directorio = /public_html 	
-usuario = u622404615
-contraseña = Jon1176
-puerto = 21
