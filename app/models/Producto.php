@@ -405,7 +405,7 @@ class Producto extends Model
                 WHERE pe.estado_id = 9 AND pe.activo = 'S' AND p.FECHA_ALTA <> '0000-00-00'
                 GROUP BY dp.producto_id,dp.llego,dp.codigo_prod,dp.medida_prod,dp.tipo_medida_prod,dp.talle_prod,dp.color_prod,dp.aroma_prod,
                 p.DESCRIPCION,p.FAMILIA,
-                m.descripcion,t.descripcion,c.descripcion,a.descripcion";
+                m.descripcion,t.descripcion,c.descripcion,a.descripcion"; 
 
        $consulta = $conexion->Prepare($sql);
 

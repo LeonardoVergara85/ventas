@@ -104,6 +104,7 @@ TableProdPed = $('#table_productos_pedidos').DataTable({
             if(value.medida_prod != 0){
                 med = value.medida_prod+'-'+value.tipomedida;
             }
+            
             TableProdPed.row.add( [
                 '<strong>'+value.codigo_prod+'</strong>',
                 value.DESCRIPCION,

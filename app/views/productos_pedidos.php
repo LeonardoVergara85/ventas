@@ -57,7 +57,8 @@
 						<th>Aroma</th>
 						<th>Familia</th>
 						<th>Cantidad</th>
-						<th>Cli</th>
+						<th>Cli</th> 
+            <!-- agregamos el nro de cliente -->
 					</thead>
 					<tbody>
 					</tbody>
