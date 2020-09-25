@@ -190,7 +190,7 @@ class Producto extends Model
     {
         
         $conexion = Database::DB();
-        $sql = "SELECT * FROM productos_vw";
+        $sql = "SELECT * FROM productos_vw WHERE (cantidad > 0 OR cantidad IS null)";
 
        // $consulta = $this->conexion->Prepare($sql);
 
