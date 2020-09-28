@@ -187,7 +187,7 @@ class Producto extends Model
 
 
     function obtenerProductoAll()
-    {
+    { 
         
         $conexion = Database::DB();
         $sql = "SELECT * FROM productos_vw WHERE (cantidad > 0 OR cantidad IS null)";
