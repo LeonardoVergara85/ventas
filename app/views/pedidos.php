@@ -26,7 +26,7 @@
 
 }
 
-    </style>
+</style>
 
 <div class="container-fluid" style="margin-top:10px;">
 <input type="hidden" id="usuario_id" value="<?php echo $_SESSION['usuario_id_2'];?>">
