@@ -340,6 +340,7 @@ class Pedido extends Model
                 }
 
             }else{
+                
                 $ida = $data[$i][7]; 
             }
 

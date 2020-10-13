@@ -334,6 +334,7 @@ function buscarProductoId(id){
 }
 
 function buscarProductosPedidosId(id){
+
 	$('#searchicon').show();
 	$('#divsearchicon').show();
 	
@@ -351,7 +352,8 @@ function buscarProductosPedidosId(id){
 
 			$('#searchicon').hide(1000);
     		$('#divsearchicon').hide(1000);
-	
+			$('#btn-formulario').prop('disabled',false);
+
 			$.each(r.listado,function(idx, value){
 
 			var idp = value.ID;	
@@ -508,14 +510,19 @@ function buscarPedidoId(id){
 			  $('#descuento_pdf').val(value.descuento);
 			  $('#tipodescuento_pdf').val(value.tipo_descuento_id);
 			  $('#usuario-title').html("usuario: <span class='badge badge-primary'>"+value.nombre_usu+"</span>");
+
 			  if(value.tipo_descuento_id == 1){
+
 				$('#descuento_pedido_porc').show();
 				$('#descuento_pedido_cant').hide();  
 				$('#descuento_pedido_porc').val(value.descuento);
+
 			  }else{
+
 				$('#descuento_pedido_porc').hide();
 				$('#descuento_pedido_cant').show();  
 				$('#descuento_pedido_cant').val(value.descuento);
+
 			  }
 			  
 			  
@@ -1065,6 +1072,10 @@ $(document).ready(function(){
 		$('#cliente').prop('disabled',true);
 		$('#modificar-cli').show();
 		$("#table-add-prod > tbody").empty();
+
+		$('#btn-formulario').prop('disabled',true);
+
+		$('#btn-formulario').text('Modificar');	
 		// fin seteo
 
 		// buscamos los datos para rellenar los select
@@ -1088,8 +1099,8 @@ $(document).ready(function(){
 	  	$('#form-btn-imp-pedido').show();
 	  	$('#modal-header-tot').css("background-color", "lavender");
 	  	$('#modal-title-alta').html("Detalle del Pedido <span class='badge badge-info'>"+this.id+"</span>");	
-	  		
-	  	$('#btn-formulario').text('Modificar');	
+		  
+		// abrimos el modal del pedido
 	  	$('#myModalPedido').modal('show');
 		// fin seteo modal
 	});
