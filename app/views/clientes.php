@@ -32,6 +32,12 @@
 	<i class="fa fa-user-plus" aria-hidden="true"></i>
 		Nuevo
 	</button>
+	<div class="form-group col-md-12 text-center" id='divsearchicon' style="z-index: 100;position: absolute;margin-bottom: 20px;">
+				<strong>Cargando... </strong> 
+				<div class="spinner-border text-primary" role="status" id='searchicon'>
+					<span class="sr-only">Loading...</span>
+				</div>
+		</div>
  <div class="card" style="margin-top:10px;">
     <div class="card-header">
         Clientes

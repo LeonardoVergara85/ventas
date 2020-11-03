@@ -278,7 +278,7 @@ class Producto extends Model
     {
         
         $conexion = Database::DB();
-        $sql = "SELECT distinct fecha_alta, DATE_FORMAT(fecha_alta, '%M %Y') AS fecha FROM producto where activo = 'N' ";
+        $sql = "SELECT distinct fecha_alta, DATE_FORMAT(fecha_alta, '%M %Y') AS fecha FROM producto where activo = 'N' AND fecha_alta <> '0000-00-00' ";
 
        // $consulta = $this->conexion->Prepare($sql);
 

@@ -708,6 +708,8 @@ function listadoAromas(id_prod){
 
 function listadoPedidos(){
 
+	$('#divsearchicon').show();
+
 	$.ajax({
 		type: "POST",
 		url: "pedido/listado",
@@ -717,6 +719,7 @@ function listadoPedidos(){
 		success: function (r) {
 	
 	
+			$('#divsearchicon').hide();
 			$.each(r.listado,function(idx, value){
 
 				var btn_edit = "<button class='btn btn-primary btn-xs edit_pedido' id='"+value.id+"'><i class='fas fa-info'></i></button>";

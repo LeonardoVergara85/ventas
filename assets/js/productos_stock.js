@@ -181,6 +181,8 @@ Table = $('#table_productos_stock').DataTable({
 
   function productosSinStockAll(){
 
+    $('#divsearchicon').show();
+
     $.ajax({
     type: "POST",
     url: "prod_stock/listado_sin_stock",
@@ -190,6 +192,7 @@ Table = $('#table_productos_stock').DataTable({
     success: function (r) {
 
      //   console.log(r);
+     $('#divsearchicon').hide();
         Table2.clear().draw();   
 
         $.each(r.listado,function(idx, value){
@@ -239,7 +242,10 @@ Table = $('#table_productos_stock').DataTable({
 
   function productosStockAll(){
 
+    
+
     Table.clear().draw(); 
+    $('#divsearchicon').show();
 
     $.ajax({
     type: "POST",
@@ -250,6 +256,7 @@ Table = $('#table_productos_stock').DataTable({
     success: function (r) {
 
      //   console.log(r);
+     $('#divsearchicon').hide();
 
         $.each(r.listado,function(idx, value){
 

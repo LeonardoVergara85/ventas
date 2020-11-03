@@ -64,6 +64,8 @@ Table = $('#table_clientes').DataTable({
 
   function clientesAll(){
 
+    $('#divsearchicon').show();
+
     $.ajax({
         type: "POST",
         url: "cli/listado",
@@ -72,7 +74,8 @@ Table = $('#table_clientes').DataTable({
         },
         success: function (r) {
     
-            console.log(r);
+            //console.log(r);
+            $('#divsearchicon').hide();
     
             $.each(r.listado,function(idx, value){
     
