@@ -141,7 +141,29 @@
 	</div>		
 	</div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-			   Eliminados En desarrollo...
+			    <div class="col-sm-12" id="divTable">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							<table class="display nowrap" style="width:100%" id="table_productos_eliminados">
+								<thead>
+									<th>codigo</th>
+									<th>descripcion</th>
+									<th>Medida</th>
+									<th>Aroma</th>
+									<th>Talle</th>
+									<th>Color</th>
+									<th>Familia</th>
+									<th>Costo</th>
+									<th>Sugerido</th>
+									<th>stock</th>
+									<th></th>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>	
+						</li>
+					</ul>
+				</div>
 			</div>
         </div>
     </div>
@@ -252,7 +274,40 @@
 
             <button type='button' class='btn btn-danger' id="eliminar_producto">Eliminar</button>
 		
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- END Modal eliminar --> 
+
+  <!-- The Modal eliminar -->
+  <div class="modal fade" id="myModalRenovar" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" id='titleModalTitle_renovar'></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+			  <input type="hidden" class="form-control input-modal" id="producto_id_renovar">
+			  <div class="form-group" id="nombreModalEstado_renovar">
+				</div>
+				<div class="form-group">
+					<p class="text-primary">¿Desea Renovar el producto?</p>
+				</div>
+			
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer" id="foot">
+
+            <button type='button' class='btn btn-primary' id="renovar_producto">Aceptar</button>
+		
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>

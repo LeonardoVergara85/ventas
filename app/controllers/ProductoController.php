@@ -140,6 +140,32 @@ class ProductoController extends Controller
 
 	}
 
+	public function renovarProductoStock(){
+
+        $error = new \stdClass();
+        $resultado = new \stdClass();
+
+		try {	
+
+				$this->Producto->_id = $this->request->id_producto;
+
+
+				$this->Producto->renovarProdStock();
+			
+               $resultado->exito = true;
+			
+			//code...
+		} catch (\Throwable $th) {
+
+            $resultado = "Ocurrió un error! .";
+            $resultado->exito = false;
+
+		}
+
+		return json_encode($resultado);
+
+	}
+
 	public function modificar(){
 
         $error = new \stdClass();
@@ -214,6 +240,28 @@ class ProductoController extends Controller
 		try {
 
                 $resultado->listado = $this->Producto->obtenerProductoSinStockAll();
+                $resultado->exito = true;
+			
+			//code...
+		} catch (\Throwable $th) {
+
+            $resultado = "Error al listar los turnos.";
+            $resultado->exito = false;
+
+		}
+
+		return json_encode($resultado);
+
+	}
+	
+	public function listadoEliminados(){
+
+        $error = new \stdClass();
+        $resultado = new \stdClass();
+
+		try {
+
+                $resultado->listado = $this->Producto->obtenerProductoEliminados();
                 $resultado->exito = true;
 			
 			//code...

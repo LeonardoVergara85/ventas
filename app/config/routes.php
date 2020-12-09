@@ -64,7 +64,9 @@ $router->post('/prod/buscar_stock_id', 'ProductoController@obtenerProductoStock'
 $router->post('/prod/alta_stock', 'ProductoController@altaProductoStock');
 $router->post('/prod/modifcar_stock', 'ProductoController@modificarProductoStock');
 $router->post('/prod/delete_prod_stock', 'ProductoController@deleteProductoStock');
+$router->post('/prod/renovar_prod_stock', 'ProductoController@renovarProductoStock');
 $router->post('/prod_stock/listado_sin_stock', 'ProductoController@listadoSinstock');
+$router->post('/prod_stock/listado_eliminados', 'ProductoController@listadoEliminados');
 
 // -- CLIENTES -- //
 $router->post('/cli/listado', 'ClienteController@listado');

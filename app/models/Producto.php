@@ -144,6 +144,29 @@ class Producto extends Model
     
 		 return $consulta;
     }
+    
+
+    function renovarProdStock()
+    {
+
+        $id =  $this->_id;
+
+        $conexion = Database::DB();
+
+         $conexion->startTrans();
+            ///
+         $sql = "UPDATE producto SET activo = 'S'
+                WHERE id = ?";
+
+         $consulta = $conexion->Prepare($sql);
+
+         $conexion->Execute($consulta,array($id));
+
+            ///
+         $conexion->completeTrans();
+    
+		 return $consulta;
+    }
 
     function modificar()
     {
@@ -224,6 +247,40 @@ class Producto extends Model
         
         $conexion = Database::DB();
         $sql = "SELECT * FROM productos_stock_vw WHERE stock <= 0 ";
+
+        $consulta = $conexion->Execute($sql);
+      
+        $resultado = array();
+		while ($r = $consulta->fetchRow())
+			$resultado[] = $r;
+
+		   return $resultado;
+    }
+
+    function obtenerProductoEliminados()
+    {
+        
+        $conexion = Database::DB();
+        $sql = "SELECT
+        `p`.`id` AS `ID`,`p`.`codigo` AS `CODIGO`,
+        `p`.`descripcion` AS `DESCRIPCION`,
+        `p`.`familia_id` AS `FAMILIA_ID`,
+        `p`.`medida` AS `MEDIDA`,
+        `p`.`medida_id` AS `MEDIDA_DESC`,
+        `p`.`talles` AS `TALLES`,
+        `p`.`color` AS `COLOR`,
+        `p`.`aromas` AS `AROMAS`,
+        `fp`.`descripcion` AS `FAMILIA`,
+        `fp`.`porc_sugerido` AS `POR_SUG_FAMILIA`,
+        round(`p`.`costo`,0) AS `PRECIO_COSTO`,
+        round(`p`.`sugerido`,0) AS `PRECIO_SUGERIDO`,
+        `p`.`fecha_alta` AS `fecha_alta`,
+        `s`.`cantidad` AS `stock`,
+        `s`.`punto_reposicion` AS `punto_reposicion` 
+        FROM `producto` `p` 
+        JOIN `familia_producto` `fp` on(`p`.`familia_id` = `fp`.`id`) 
+        JOIN `stock` `s` on(`s`.`producto_id` = `p`.`id`)
+        WHERE `p`.`activo` = 'N' AND `p`.`fecha_alta` = '0000-00-00'";
 
         $consulta = $conexion->Execute($sql);
       

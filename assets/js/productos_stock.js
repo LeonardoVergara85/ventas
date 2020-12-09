@@ -179,6 +179,95 @@ Table = $('#table_productos_stock').DataTable({
     
   });
 
+  Table3 = $('#table_productos_eliminados').DataTable({
+    dom: 'Bfrtip',
+    buttons: [
+        {
+            
+            extend:    'pdfHtml5',
+            text:      '<i class="fa fa-file-pdf AzulChicoBtb"></i>',
+            titleAttr: 'PDF',
+            message: 'Listado de productos ELIMINADOS. Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+            download: 'open',
+            title: 'Productos Eliminados'
+        },
+        {
+            extend: 'print',
+            text:      '<i class="fa fa-print AzulChicoBtb" ></i>',
+            titleAttr: 'Imprimir',
+            message: 'Listado de productos ELIMINADOS. Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+            messageBottom: null,
+            title: 'Productos Eliminados'
+        }
+    ],
+
+    responsive: true,
+    colReorder: true,
+    rowReorder: {
+        selector: 'td:nth-child(2)'
+    },
+    
+    "language": {
+        "url": "assets/libs/js/DataTables-1.10.12/extensions/table-spanish.json"
+    },
+    'columnDefs': [
+        {
+            "targets": 0, // your case first column
+             "width": "5%",
+             "className": "dt-right",
+       },{
+            "targets": 1, // your case first column
+            "className": "text-left",
+            "width": "25%",
+        },{
+            "targets": 2, // your case first column
+            "className": "text-center",
+            "width": "7%",
+        },{
+            "targets": 3, // your case first column
+            "className": "text-center",
+            "width": "9%",
+        },{
+            "targets": 4, // your case first column
+            "className": "text-left",
+            "width": "7%",
+            "className": "dt-center",
+        },{
+            "targets": 5, // your case first column
+            "className": "text-left",
+            "width": "7%",
+            "className": "dt-center",
+        },{
+            "targets": 6, // your case first column
+            "className": "text-left",
+             "width": "15%",
+             "className": "dt-center",
+       },{
+            "targets": 7, // your case first column
+            "className": "text-center",
+             "width": "5%",
+             "className": "dt-center",
+       },{
+            "targets": 8, // your case first column
+            "className": "text-center",
+            "width": "5%",
+            "className": "dt-center",
+        },{
+            "targets": 9, // your case first column
+            "className": "text-left",
+            "width": "5%",
+            "className": "dt-center",
+        },{
+            "targets": 10, // your case first column
+            "className": "text-left",
+            "width": "5%",
+            "className": "dt-center",
+        }
+    ],            
+
+    
+  });
+
   function productosSinStockAll(){
 
     $('#divsearchicon').show();
@@ -230,6 +319,62 @@ Table = $('#table_productos_stock').DataTable({
                 value.PRECIO_SUGERIDO,
                 '<font color="'+color_stock+'"><strong>'+value.stock+'</strong></font>',
                 btn_edit+' '+btn_delete
+                ]).draw();
+        });
+
+    }
+
+  });
+
+}
+
+
+function productosEliminados(){
+
+    $('#divsearchicon').show();
+
+    $.ajax({
+    type: "POST",
+    url: "prod_stock/listado_eliminados",
+    dataType: 'json',
+    data: {
+    },
+    success: function (r) {
+
+     //   console.log(r);
+     $('#divsearchicon').hide();
+
+        Table3.clear().draw();   
+
+        $.each(r.listado,function(idx, value){
+
+
+           var btn_renovar = "<button class='btn btn-primary btn-xs renovar' id='"+value.ID+"' name='"+value.CODIGO+"*"+value.DESCRIPCION+"*"+value.stock+"'><i class='fas fa-retweet'></i></button>";
+        
+            var med_desc = '';
+            var med = '';
+
+
+            if(value.MEDIDA_DESC != null){
+                 med_desc = value.MEDIDA_DESC;
+            }
+            if(value.MEDIDA != 0){
+                med = value.MEDIDA;
+           }
+
+
+            Table3.row.add([
+                value.CODIGO,
+                value.DESCRIPCION,
+                med+' '+med_desc,
+                value.AROMAS,
+                value.TALLES,
+                value.COLOR,
+                '<strong>'+value.FAMILIA+'</strong>',
+                '$ '+value.PRECIO_COSTO,
+                value.PRECIO_SUGERIDO,
+                '<strong>'+value.stock+'</strong>',
+                btn_renovar
                 ]).draw();
         });
 
@@ -518,6 +663,7 @@ $(document).ready(function(){
     });  
     // fin ALTA/MODIFICAR PRODUCTO //
 
+    // eliminar el producto
     $(document).on("click",".delete", function(event){
 
         var cod = this.name.split('*')[0];
@@ -527,6 +673,21 @@ $(document).ready(function(){
 		$('#nombreModalEstado_delete').html(desc);
 
 		$('#myModalDelete').modal('show');
+		
+		
+    });
+
+    // renovar el producto
+    $(document).on("click",".renovar", function(event){
+
+        var cod = this.name.split('*')[0];
+        var desc = this.name.split('*')[1];
+        var stock = this.name.split('*')[2];
+		$('#producto_id_renovar').val(this.id);
+		$('#titleModalTitle_renovar').html('Código: <strong>'+cod+'</strong>');
+		$('#nombreModalEstado_renovar').html(desc+"<br> <b>Stock</b>: <span class='adge badge-pill badge-secondary'>"+stock+"</span>");
+
+		$('#myModalRenovar').modal('show');
 		
 		
     });
@@ -571,12 +732,55 @@ $(document).ready(function(){
 		
     });
 
+    $(document).on("click","#renovar_producto", function(event){
+
+        var idp = $('#producto_id_renovar').val();
+        
+        $.ajax({
+            type: "POST",
+            url: "prod/renovar_prod_stock",
+            dataType: 'json',
+            data: {
+                id_producto: idp,
+            },
+            success: function (r) {
+
+                if(r.exito == true){
+                    
+                    Table3.clear().draw();   
+
+                    productosEliminados();
+                    
+                    $('#myModalRenovar').modal('hide');
+
+                    toastr.success('El producto se Renovó con éxito'); 
+
+
+                }else{
+
+                    toastr.error(r.error.mensaje); 
+
+                }
+        
+        
+            }
+        
+          });
+		
+		
+    });
+
     $(document).on("click","#prod-tab", function(event){
         productosStockAll();
     });
 
     $(document).on("click","#prod-sin-tab", function(event){
         productosSinStockAll();
+    });
+
+    
+    $(document).on("click","#prod-eli-tab", function(event){
+        productosEliminados();
     });
 
 });
