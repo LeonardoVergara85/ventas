@@ -80,6 +80,7 @@ $router->post('/cli/modificar', 'ClienteController@modificar');
 $router->post('/pedido/guardar', 'PedidoController@guardarPedido');
 $router->post('/pedido/modificar', 'PedidoController@modificarPedido');
 $router->post('/pedido/listado', 'PedidoController@listadoPedidos');
+$router->post('/pedido/listado_finalizados', 'PedidoController@listadoPedidosFinalizados');
 $router->post('/pedido/id', 'PedidoController@pedidoId');
 $router->post('/pedido/productosid', 'PedidoController@productosPedidoId');
 $router->post('/pedido/productospedidos', 'PedidoController@productosPedidos');

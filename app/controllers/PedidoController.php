@@ -139,6 +139,29 @@ class PedidoController extends Controller
 		return json_encode($resultado);
 
 	}
+	
+
+	public function listadoPedidosFinalizados(){
+
+        $error = new \stdClass();
+        $resultado = new \stdClass();
+        $this->Pedido = new Pedido();
+
+		try {
+                $resultado->listado = $this->Pedido->obtenerPedidosFinalizadosAll();
+                $resultado->exito = true;
+			
+			//code...
+		} catch (\Throwable $th) {
+
+            $resultado = "Error al listar los pedidos.";
+            $resultado->exito = false;
+
+		}
+
+		return json_encode($resultado);
+
+	}
 
 	public function pedidoId(){
 

@@ -361,7 +361,26 @@ class Pedido extends Model
         
         $conexion = Database::DB();
 
-        $sql = "SELECT * FROM pedidos_vw";
+        $sql = "SELECT * FROM pedidos_vw WHERE estado_id <> 5";
+
+       // $consulta = $this->conexion->Prepare($sql);
+
+        $consulta = $conexion->Execute($sql);
+      
+        $resultado = array();
+		while ($r = $consulta->fetchRow())
+			$resultado[] = $r;
+
+		   return $resultado;
+    }
+    
+
+    function obtenerPedidosFinalizadosAll()
+    {
+        
+        $conexion = Database::DB();
+
+        $sql = "SELECT * FROM pedidos_vw WHERE estado_id = 5 ";
 
        // $consulta = $this->conexion->Prepare($sql);
 

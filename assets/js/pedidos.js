@@ -77,6 +77,86 @@ TablePedidos = $('#table_pedidos_general').DataTable({
 
     
   });
+  
+  TablePedidos2 = $('#table_pedidos_finalizados').DataTable({
+    dom: 'Bfrtip',
+    buttons: [
+        {
+            
+            extend:    'pdfHtml5',
+            text:      '<i class="fa fa-file-pdf AzulChicoBtb"></i>',
+            titleAttr: 'PDF',
+            message: 'Listado de pedidos. Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+            download: 'open',
+			title: 'Pedidos Finalizados',
+			exportOptions: {
+				columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+			}
+        },
+        {
+            extend: 'print',
+            text:      '<i class="fa fa-print AzulChicoBtb" ></i>',
+            titleAttr: 'Imprimir',
+            message: 'Listado de pedidos. Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+			messageBottom: null,
+			title: 'Pedidos Finalizados',
+			exportOptions: {
+				columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+			}
+        }
+    ],
+
+    responsive: true,
+    colReorder: true,
+    rowReorder: {
+        selector: 'td:nth-child(2)'
+    },
+    
+    "language": {
+        "url": "assets/libs/js/DataTables-1.10.12/extensions/table-spanish.json"
+    },
+    'columnDefs': [
+        {
+            "targets": 0, // your case first column
+             "width": "10%",
+             "className": "dt-center",
+       },{
+            "targets": 1, // your case first column
+            "className": "text-left",
+            "width": "50%",
+        },{
+            "targets": 2, // your case first column
+            "className": "text-center",
+            "width": "10%",
+        },{
+            "targets": 3, // your case first column
+            "className": "text-center",
+            "width": "10%",
+        },{
+            "targets": 4, // your case first column
+            "className": "text-center",
+            "width": "15%",
+            "className": "dt-center",
+        },{
+            "targets": 5, // your case first column
+            "className": "text-left",
+            "width": "5%",
+            "className": "dt-center",
+        },{
+            "targets": 6, // your case first column
+            "className": "text-left",
+            "width": "5%",
+            "className": "dt-center",
+        },{
+            "targets": 7, // your case first column
+            "className": "text-left",
+            "width": "5%",
+            "className": "dt-center",
+        }
+    ],            
+
+    
+  });
 
 function sumatoria(){
 
@@ -718,7 +798,7 @@ function listadoPedidos(){
 		},
 		success: function (r) {
 	
-	
+			TablePedidos2.clear().draw();
 			$('#divsearchicon').hide();
 			$.each(r.listado,function(idx, value){
 
@@ -728,6 +808,47 @@ function listadoPedidos(){
 				var btnelim = '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1"><a class="dropdown-item edit_estados" id ="'+value.id+'" name="'+'<strong>'+value.nro_cliente+'</strong> - '+value.apellido_cli+', '+value.nombre_cli+'*'+value.estado_id+'" href="#">Cambiar estado</a><a class="dropdown-item eliminar" href="#" id ="'+value.id+'" name="'+'<strong>'+value.nro_cliente+'</strong> - '+value.apellido_cli+', '+value.nombre_cli+'">Eliminar</a></div>';
 				var btn = '<div class="btn-group" role="group">'+btnest+btnelim+'</div></div>';
                 TablePedidos.row.add( [
+                    '<strong>'+value.id+'<strong>',
+                    '<strong>'+value.nro_cliente+'</strong> - '+value.apellido_cli+', '+value.nombre_cli,
+                    value.fecha_cierre_,
+                    value.formapago,
+					value.envio,
+					'<span class="adge badge-pill badge-success">'+'$ '+(eval(value.precio_total)).toFixed(2)+'</span>',
+					value.estado,
+					btn_edit+' '+btn
+                    ]).draw();
+				
+			});
+	
+		}
+	
+	  });
+}
+
+function listadoPedidosFinalizados(){
+
+	$('#divsearchicon').show();
+
+	$.ajax({
+		type: "POST",
+		url: "pedido/listado_finalizados",
+		dataType: 'json',
+		data: {
+		},
+		success: function (r) {
+
+			TablePedidos2.clear().draw();
+	
+	
+			$('#divsearchicon').hide();
+			$.each(r.listado,function(idx, value){
+
+				var btn_edit = "<button class='btn btn-primary btn-xs edit_pedido' id='"+value.id+"'><i class='fas fa-info'></i></button>";
+				//var btneditar = '<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Detalle</button>';
+				var btnest = '<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-asterisk"></i></button>';
+				var btnelim = '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1"><a class="dropdown-item edit_estados" id ="'+value.id+'" name="'+'<strong>'+value.nro_cliente+'</strong> - '+value.apellido_cli+', '+value.nombre_cli+'*'+value.estado_id+'" href="#">Cambiar estado</a><a class="dropdown-item eliminar" href="#" id ="'+value.id+'" name="'+'<strong>'+value.nro_cliente+'</strong> - '+value.apellido_cli+', '+value.nombre_cli+'">Eliminar</a></div>';
+				var btn = '<div class="btn-group" role="group">'+btnest+btnelim+'</div></div>';
+                TablePedidos2.row.add( [
                     '<strong>'+value.id+'<strong>',
                     '<strong>'+value.nro_cliente+'</strong> - '+value.apellido_cli+', '+value.nombre_cli,
                     value.fecha_cierre_,
@@ -1737,7 +1858,12 @@ $('#form_estado_cliente').validate({
 }); 
 
 // fin MOD ESTADO //
-	
+$(document).on("click","#pedidos-tab", function(event){
+	listadoPedidos();
+});
+$(document).on("click","#pedidos-finalizados", function(event){
+	listadoPedidosFinalizados();
+});
 
 });
 

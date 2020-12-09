@@ -56,17 +56,30 @@
 	<button type="button" class="btn btn-secondary btn-sm" id="btnlistavieja" value='0'>lista vieja</button>
 </div>
 <div class="form-group col-md-12 text-center" id='divsearchicon' style="z-index: 100;position: absolute;margin-bottom: 20px;">
-				<strong>Cargando... </strong> 
-				<div class="spinner-border text-primary" role="status" id='searchicon'>
-					<span class="sr-only">Loading...</span>
-				</div>
-		</div>
- <div class="card" style="margin-top:10px;">
-    <div class="card-header">
-        Pedidos
+	<strong>Cargando... </strong> 
+	<div class="spinner-border text-primary" role="status" id='searchicon'>
+		<span class="sr-only">Loading...</span>
+	</div>
+</div>
+<br>
+
+<div class="card ">
+    <div class="card-header"> 
+        <ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pedidos-tab" data-toggle="tab" href="#pedidos" role="tab" aria-controls="home" aria-selected="true" style="color: #495057;">Pedidos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " id="pedidos-finalizados" data-toggle="tab" href="#finalizados" role="tab" aria-controls="finalizados" aria-selected="false" style="color: #495057;">Pedidos finalizados</a>
+            </li>
+        </ul>
     </div>
+
     <div class="card-body">
-    <div class="col-sm-12" id="divTable">
+	<div class="tab-content" id="myTabContent">
+		<div class="tab-pane fade show active" id="pedidos" role="tabpanel" aria-labelledby="pedidos-tab">
+			
+		<div class="col-sm-12" id="divTable">
 		<ul class="list-group list-group-flush">
 			<li class="list-group-item">
 				<table class="display nowrap" style="width:100%" id="table_pedidos_general">
@@ -86,8 +99,37 @@
 			</li>
 		</ul>
 	</div>
+  
+</div>
+    <div class="tab-pane fade" id="finalizados" role="tabpanel" aria-labelledby="finalizados-tab">
+	<div class="col-sm-12" id="divTable">
+	<ul class="list-group list-group-flush">
+			<li class="list-group-item">
+				<table class="display nowrap" style="width:100%" id="table_pedidos_finalizados">
+					<thead>
+						<th>Id pedido</th>
+						<th>Cliente</th>
+						<th>Fecha Cierre</th>
+						<th>Pago</th>
+						<th>Envío</th>
+						<th>Precio</th>
+						<th>Estado</th>
+						<th></th>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>	
+			</li>
+		</ul>
+	</div>		
+	</div>
+        </div>
     </div>
- </div>
+ 
+
+
+ 
+
 
  <!-- Modal -->
 <div id="modal_pedido" class="modal fade" role="dialog" style="overflow-y: scroll;">
