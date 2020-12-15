@@ -7,9 +7,9 @@ TablePedidos = $('#table_pedidos_general').DataTable({
             extend:    'pdfHtml5',
             text:      '<i class="fa fa-file-pdf AzulChicoBtb"></i>',
             titleAttr: 'PDF',
-            message: 'Listado de clientes. Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+            message: 'Listado de pedidos. Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
             download: 'open',
-			title: 'Clientes',
+			title: 'Pedidos',
 			exportOptions: {
 				columns: [ 0, 1, 2, 3, 4, 5, 6 ]
 			}
@@ -18,7 +18,7 @@ TablePedidos = $('#table_pedidos_general').DataTable({
             extend: 'print',
             text:      '<i class="fa fa-print AzulChicoBtb" ></i>',
             titleAttr: 'Imprimir',
-            message: 'Listado de clientes. Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+            message: 'Listado de pedidos. Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
 			messageBottom: null,
 			exportOptions: {
 				columns: [ 0, 1, 2, 3, 4, 5, 6 ]
@@ -798,7 +798,8 @@ function listadoPedidos(){
 		},
 		success: function (r) {
 	
-			TablePedidos2.clear().draw();
+			TablePedidos.clear().draw(); // limpiamos la tabla
+
 			$('#divsearchicon').hide();
 			$.each(r.listado,function(idx, value){
 
@@ -837,7 +838,7 @@ function listadoPedidosFinalizados(){
 		},
 		success: function (r) {
 
-			TablePedidos2.clear().draw();
+			TablePedidos2.clear().draw(); // limpimos la tabla
 	
 	
 			$('#divsearchicon').hide();
@@ -1354,6 +1355,7 @@ $(document).ready(function(){
 				TablePedidos.clear().draw();   
 
 				listadoPedidos();
+				listadoPedidosFinalizados();
 
 				$('#myModalEliminar').modal('hide');
 
@@ -1678,12 +1680,15 @@ $('#alta_pedido').validate({
 			var tipoaccion = $('#tipo_accion').val();	
 			var url = '';
 			var tipo = '';
+			var tipo2 = '';
+
 			if(tipoaccion == 1){
 				url = 'pedido/guardar';
 				tipo = 'guardó';
 			}else{
 				url = 'pedido/modificar';
 				tipo = 'modificó';
+				tipo2 = 'si';
 			}	
 		$('#btn-formulario').prop('disabled',true);	
 		// console.log(productos);
@@ -1717,6 +1722,12 @@ $('#alta_pedido').validate({
 				TablePedidos.clear().draw();   
 
 				listadoPedidos();
+
+				if(tipo2 == 'si'){
+
+					listadoPedidosFinalizados();
+
+				}
 
 				$('#cod2').val(1);
 
@@ -1803,8 +1814,6 @@ $('#form_estado_cliente').validate({
            
 	submitHandler: function (form) {
 		// cuando va bien
-
-
 		$.ajax({
 		type: "POST",
 		url: 'pedido/mod_estado',
@@ -1820,6 +1829,7 @@ $('#form_estado_cliente').validate({
 				TablePedidos.clear().draw();   
 
 				listadoPedidos();
+				listadoPedidosFinalizados();
 
 				$('#cod2').val(1);
 
@@ -1858,12 +1868,12 @@ $('#form_estado_cliente').validate({
 }); 
 
 // fin MOD ESTADO //
-$(document).on("click","#pedidos-tab", function(event){
-	listadoPedidos();
-});
-$(document).on("click","#pedidos-finalizados", function(event){
-	listadoPedidosFinalizados();
-});
+	$(document).on("click","#pedidos-tab", function(event){
+		listadoPedidos();
+	});
+	$(document).on("click","#pedidos-finalizados", function(event){
+		listadoPedidosFinalizados();
+	});
 
 });
 
