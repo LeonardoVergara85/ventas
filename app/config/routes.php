@@ -68,6 +68,7 @@ $router->post('/prod/renovar_prod_stock', 'ProductoController@renovarProductoSto
 $router->post('/prod_stock/listado_sin_stock', 'ProductoController@listadoSinstock');
 $router->post('/prod_stock/listado_eliminados', 'ProductoController@listadoEliminados');
 
+
 // -- CLIENTES -- //
 $router->post('/cli/listado', 'ClienteController@listado');
 $router->post('/cli/listado_autocompletar', 'ClienteController@listadoParaAutocompletar');
