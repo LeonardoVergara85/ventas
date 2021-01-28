@@ -32,7 +32,7 @@ class PDF extends FPDF {
 
         $this->Ln(18);
 
-        $this->SetFont('Arial','I',8);
+        $this->SetFont('Arial','I',10);
 
         $this->Cell(150,5,utf8_decode('CLIENTE Nº: '.$nro),0,0,'R');
 
@@ -43,23 +43,23 @@ class PDF extends FPDF {
         $this->Cell(170,12,utf8_decode($localidad),1,0,'C');
         $this->Ln(20);
 
-        $this->SetFont('Arial','I',14);
-        $this->Cell(90,8,utf8_decode('NOMBRE: '.$apellido.', '.$nombre),0,0,'L');
-
-        $this->Ln(8);
-
-        $this->Cell(90,8,utf8_decode('TELÉFONO: '.$tel),0,0,'L');
-
-        $this->Ln(8);
-
-        $this->Cell(90,8,utf8_decode('DIRECCIÓN: '.$domi),0,0,'L');
+        $this->SetFont('Arial','I',17);
+        $this->Cell(90,10,utf8_decode('NOMBRE: '.$apellido.', '.$nombre),0,0,'L');
 
         $this->Ln(10);
 
-        $this->SetFont('Arial','B',12);
-        $this->Cell(50,8,utf8_decode('SALDO: $ '.$saldo),1,0,'L');
+        $this->Cell(90,10,utf8_decode('TELÉFONO: '.$tel),0,0,'L');
+
+        $this->Ln(10);
+
+        $this->Cell(90,10,utf8_decode('DIRECCIÓN: '.$domi),0,0,'L');
+
+        $this->Ln(15);
+
+        $this->SetFont('Arial','B',20);
+        $this->Cell(170,12,utf8_decode('SALDO: $ '.$saldo),1,0,'C');
        
-        $this->Ln(20);
+        $this->Ln(25);
 
         $this->SetFont('Arial','B',12);
         $this->Cell(170,8,utf8_decode('JENZO Distribuciones'),0,0,'R');
