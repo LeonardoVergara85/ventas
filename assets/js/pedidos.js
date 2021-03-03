@@ -432,7 +432,7 @@ function buscarProductosPedidosId(id){
 
 			$('#searchicon').hide(1000);
     		$('#divsearchicon').hide(1000);
-			$('#btn-formulario').prop('disabled',false);
+			//$('#btn-formulario').prop('disabled',false);
 
 			$.each(r.listado,function(idx, value){
 
@@ -931,6 +931,67 @@ $(document).ready(function(){
 	listado_productos(); // listamos los productos
 
 
+	
+
+	$(document).on("click","#btn-verificar", function(event){
+
+		// mostramos en pantalla que está verificando
+		$('#'+this.id).html('verificando..');
+
+		var importe_total = 0
+
+		// realizamos la sumatoria de los totales de cada producto que esté activo
+		$(".precio").each(
+			function(index, value) {
+				if($('#precio-total'+this.name).is(':disabled')){
+
+				}else{
+					if ( $.isNumeric( $(this).val() ) ){
+						importe_total = importe_total + eval($(this).val());
+						//console.log(importe_total);
+						 }
+				}	
+			
+		  }
+	   );
+
+	   // verficamos si tiene descuento y lo calculamos
+	   if(($("#tipo_descuento_pedido option:selected").val() == 1) && ($('#descuento_pedido_porc option:selected').val() != 0)){
+
+        var desc = $('#descuento_pedido_porc option:selected').val();
+		$('#total_pedido').val((importe_total-(importe_total*desc/100)).toFixed(2));
+
+	   }else if(($("#tipo_descuento_pedido option:selected").val() == 2) && ($('#descuento_pedido_cant').val() != "")){
+
+		var desc = $('#descuento_pedido_cant').val();
+		$('#total_pedido').val((importe_total-(desc)).toFixed(2));
+
+	   }
+	   
+	   // restamos la seña al monto total
+	   setTimeout(function(){
+		var senia = $('#senia_pedido').val();		
+		var tot = $('#total_pedido').val();
+		$('#saldo_pedido').val((tot - senia).toFixed(2));
+	  },500);
+	   
+		
+		
+
+		setTimeout(function(){
+
+			$('#btn-verificar').html('<i class="fa fa-check"></i> Verificado');
+			$('#btn-verificar').removeClass('btn-outline-info');
+			$('#btn-verificar').addClass('btn-outline-success');
+			$('#btn-verificar').prop('disabled',true);
+
+			$('#btn-formulario').removeClass('btn-secondary');
+			$('#btn-formulario').addClass('btn-primary');
+			$('#btn-formulario').prop('disabled',false);
+
+		  },1500);			
+
+	});
 
 	$(document).on("click","#btnlistavieja", function(event){
 
@@ -965,6 +1026,11 @@ $(document).ready(function(){
 		//listado_envios();
 		//listado_fpagos();
 
+		$('#btn-formulario').removeClass('btn-secondary');
+		$('#btn-formulario').addClass('btn-primary');
+		$('#btn-formulario').prop('disabled',false);
+
+		$('#btn-verificar').hide();
 		$('.inp-form').removeClass('is-invalid');
 		$('.span').hide();
 		/////////////
@@ -1007,6 +1073,11 @@ $(document).ready(function(){
 		//listado_envios();
 		//listado_fpagos();
 
+		$('#btn-formulario').removeClass('btn-secondary');
+		$('#btn-formulario').addClass('btn-primary');
+		$('#btn-formulario').prop('disabled',false);
+
+		$('#btn-verificar').hide();
 		$('.inp-form').removeClass('is-invalid');
 		$('.span').hide();
 		/////////////
@@ -1164,7 +1235,16 @@ $(document).ready(function(){
 		
 		  });
 
-		 
+		 // reseteamos los botones
+		$('#btn-verificar').show();
+		$('#btn-verificar').html('Verificar Cálculo');
+		$('#btn-verificar').removeClass('btn-outline-success');
+		$('#btn-verificar').addClass('btn-outline-info');
+		$('#btn-verificar').prop('disabled',false);
+
+		$('#btn-formulario').addClass('btn-secondary');
+		$('#btn-formulario').prop('disabled',true);
+		// fin
 
 		  
         
@@ -1175,6 +1255,17 @@ $(document).ready(function(){
 		// eliminamos las clases de error y los span con mensajes de error
 		$('.inp-form').removeClass('is-invalid');
 		$('.span').hide();
+		// fin
+
+		// reseteamos los botones
+		$('#btn-verificar').show();
+		$('#btn-verificar').html('Verificar Cálculo');
+		$('#btn-verificar').removeClass('btn-outline-success');
+		$('#btn-verificar').addClass('btn-outline-info');
+		$('#btn-verificar').prop('disabled',false);
+
+		$('#btn-formulario').addClass('btn-secondary');
+		$('#btn-formulario').prop('disabled',true);
 		// fin
 
 		// seteamos a cero los campos
@@ -1193,12 +1284,12 @@ $(document).ready(function(){
 		$('#tipo_descuento_pedido').prop('disabled',false);
 		$('#descuento_pedido_cant').prop('disabled',false);
 		$('#descuento_pedido_porc').prop('disabled',false);
-		$('#tipo_accion').val(2);	
+		$('#tipo_accion').val(2);		
 		$('#cliente').prop('disabled',true);
 		$('#modificar-cli').show();
 		$("#table-add-prod > tbody").empty();
 
-		$('#btn-formulario').prop('disabled',true);
+		$('#btn-formulario').prop('disabled',false);
 
 		$('#btn-formulario').text('Modificar');	
 		// fin seteo
@@ -1224,7 +1315,9 @@ $(document).ready(function(){
 	  	$('#form-btn-imp-pedido').show();
 	  	$('#modal-header-tot').css("background-color", "lavender");
 	  	$('#modal-title-alta').html("Detalle del Pedido <span class='badge badge-info'>"+this.id+"</span>");	
-		  
+		 
+		//alert();  
+		$('#btn-formulario').prop('disabled',true);  
 		// abrimos el modal del pedido
 	  	$('#myModalPedido').modal('show');
 		// fin seteo modal
@@ -1290,6 +1383,16 @@ $(document).ready(function(){
 			//$('#precio-total'+this.value).val(0);
 			
 		    $('#myModalDeshabilitar').modal('hide');
+			// reseteamos los botones
+			$('#btn-verificar').show();
+			$('#btn-verificar').html('Verificar Cálculo');
+			$('#btn-verificar').removeClass('btn-outline-success');
+			$('#btn-verificar').addClass('btn-outline-info');
+			$('#btn-verificar').prop('disabled',false);
+
+			$('#btn-formulario').addClass('btn-secondary');
+			$('#btn-formulario').prop('disabled',true);
+			// fin
 
 		 }else{
 
@@ -1317,6 +1420,16 @@ $(document).ready(function(){
 			  },150);
 			
 		    $('#myModalDeshabilitar').modal('hide');
+			// reseteamos los botones
+			$('#btn-verificar').show();
+			$('#btn-verificar').html('Verificar Cálculo');
+			$('#btn-verificar').removeClass('btn-outline-success');
+			$('#btn-verificar').addClass('btn-outline-info');
+			$('#btn-verificar').prop('disabled',false);
+
+			$('#btn-formulario').addClass('btn-secondary');
+			$('#btn-formulario').prop('disabled',true);
+			// fin
 
 		 }
 	
@@ -1384,6 +1497,17 @@ $(document).ready(function(){
 		$('#total_pedido').val(aux.toFixed(2));
 		$('#senia_pedido').change();
 		$("#newProd"+res).remove();
+
+		// reseteamos los botones
+		$('#btn-verificar').show();
+		$('#btn-verificar').html('Verificar Cálculo');
+		$('#btn-verificar').removeClass('btn-outline-success');
+		$('#btn-verificar').addClass('btn-outline-info');
+		$('#btn-verificar').prop('disabled',false);
+
+		$('#btn-formulario').addClass('btn-secondary');
+		$('#btn-formulario').prop('disabled',true);
+		// fin
 		
 	});
 
@@ -1415,6 +1539,17 @@ $(document).ready(function(){
 		
 		var tot = $('#total_pedido').val();
 		$('#saldo_pedido').val((tot - this.value).toFixed(2));
+
+		// reseteamos los botones
+		$('#btn-verificar').show();
+		$('#btn-verificar').html('Verificar Cálculo');
+		$('#btn-verificar').removeClass('btn-outline-success');
+		$('#btn-verificar').addClass('btn-outline-info');
+		$('#btn-verificar').prop('disabled',false);
+
+		$('#btn-formulario').addClass('btn-secondary');
+		$('#btn-formulario').prop('disabled',true);
+		// fin
 	
 	  
 	});
@@ -1458,6 +1593,17 @@ $(document).ready(function(){
 			$('#descuento_pedido_porc').hide();
 
 		}
+
+		// reseteamos los botones
+		$('#btn-verificar').show();
+		$('#btn-verificar').html('Verificar Cálculo');
+		$('#btn-verificar').removeClass('btn-outline-success');
+		$('#btn-verificar').addClass('btn-outline-info');
+		$('#btn-verificar').prop('disabled',false);
+
+		$('#btn-formulario').addClass('btn-secondary');
+		$('#btn-formulario').prop('disabled',true);
+		// fin
 		
 	});
 
@@ -1685,12 +1831,15 @@ $('#alta_pedido').validate({
 			if(tipoaccion == 1){
 				url = 'pedido/guardar';
 				tipo = 'guardó';
-			}else{
+			}else if(tipoaccion == 2){
 				url = 'pedido/modificar';
 				tipo = 'modificó';
-				tipo2 = 'si';
+				if($('#tipo_accion_mod').val() == 'finalizados'){
+					tipo2 = 'si';
+				}
+				
 			}	
-		$('#btn-formulario').prop('disabled',true);	
+		//$('#btn-formulario').prop('disabled',true);	
 		// console.log(productos);
 		// return false;
 		setTimeout(function() { 
@@ -1721,25 +1870,29 @@ $('#alta_pedido').validate({
 
 				TablePedidos.clear().draw();   
 
-				listadoPedidos();
-
-				if(tipo2 == 'si'){
-
-					listadoPedidosFinalizados();
-
-				}
-
 				$('#cod2').val(1);
 
 				$('#myModalPedido').modal('hide');
 
 				toastr.success('Se '+tipo+' con éxito'); 
+
 				$('#btn-formulario').prop('disabled',false);	
 
+				if(tipo2 == 'si'){
+
+					listadoPedidosFinalizados();
+
+				}else{
+
+					listadoPedidos();
+				}
+
+				
 		}else{
 
 			toastr.error(r.error.mensaje); 
 			$('#btn-formulario').prop('disabled',false);	
+			
 		}
 
 		}
@@ -1870,9 +2023,11 @@ $('#form_estado_cliente').validate({
 // fin MOD ESTADO //
 	$(document).on("click","#pedidos-tab", function(event){
 		listadoPedidos();
+		$('#tipo_accion_mod').val('actuales');
 	});
 	$(document).on("click","#pedidos-finalizados", function(event){
 		listadoPedidosFinalizados();
+		$('#tipo_accion_mod').val('finalizados');
 	});
 
 });

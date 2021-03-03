@@ -1,3 +1,4 @@
+
 ////// CAPTCHA DE SEGURIDAD ////////////////
 var res;
 var myCaptcha = new jCaptcha({

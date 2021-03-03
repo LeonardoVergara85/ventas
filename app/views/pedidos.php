@@ -243,6 +243,7 @@
         <div class="modal-body">
 		<form id="alta_pedido">
 		<input type="hidden" id="tipo_accion" value="">
+		<input type="hidden" id="tipo_accion_mod" value="actuales">
 		<input type="hidden" id="id_pedido" value="">
 		<input type="hidden" id="cod2" value="1">
 		    <div class="form-row">
@@ -274,7 +275,7 @@
 					</button>
 				</div>
 		    </div>
-			<div class="form-row">
+			<div class="form-row" id="div-tabla-prod">
 			<div class="form-group col-md-12">
 			<table class="table table-hover" id="table-add-prod">
 				<thead>
@@ -369,9 +370,7 @@
 				</div>
 			
 				<div class="form-group col-md-3">
-
-					
-				
+					<button type="button" class="btn btn-outline-info btn-sm" style="margin-top: 34px;" id="btn-verificar">Verificar Cálculo</button>
 				</div>
 				
 		      </div>
