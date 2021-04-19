@@ -24,6 +24,11 @@
     float: right;
 
 }
+.contador {
+    /* float: right; */
+    color: #555555;
+    font-style: italic;
+}
 
     </style>
 <div class="container-fluid" style="margin-top:10px;">
@@ -214,8 +219,12 @@
 			  <div class="form-group" id="nombre-troquel">
 				</div>
 				<div class="form-group">
-					<label>Saldo</label>
-					<input type="number" class="form-control input-modal" id="saldo_form" name="saldo_form">
+					<label>Saldo:</label>
+					<input type="text" class="form-control input-modal" id="saldo_form" name="saldo_form">
+				</div>
+				<div class="form-group">
+					<label>Observaciones:</label> <span class="contador" id="contadorc">100 caracteres</span>
+					<textarea class="form-control rounded-0" id="observacion_form" rows="2" maxlength="100"></textarea>
 				</div>
 		</form>		
         </div>
@@ -230,6 +239,7 @@
             <input type='hidden' name='telefono' id="telefono" value=''>
             <input type='hidden' name='domicilio' id="domicilio" value=''>
             <input type='hidden' name='saldo' id='saldo' value=''>
+            <input type='hidden' name='observacion' id='observacion' value=''>
             <button type='button' class='btn btn-primary' id='pdftroquel' title='Troquel de datos' style="margin-top:38px;">Visualizar</button>
 		</form>	
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

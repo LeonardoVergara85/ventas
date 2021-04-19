@@ -238,7 +238,7 @@ class Producto extends Model
         $resultado = array();
 		while ($r = $consulta->fetchRow())
 			$resultado[] = $r;
-
+			
 		   return $resultado;
     }
     

@@ -30,6 +30,7 @@ Table = $('#table_productos_stock').DataTable({
     "language": {
         "url": "assets/libs/js/DataTables-1.10.12/extensions/table-spanish.json"
     },
+    "order": [[ 6, "asc" ]],
     'columnDefs': [
         {
             "targets": 0, // your case first column
@@ -121,6 +122,8 @@ Table = $('#table_productos_stock').DataTable({
     "language": {
         "url": "assets/libs/js/DataTables-1.10.12/extensions/table-spanish.json"
     },
+    "order": [[ 6, "asc" ]],
+
     'columnDefs': [
         {
             "targets": 0, // your case first column
@@ -210,6 +213,8 @@ Table = $('#table_productos_stock').DataTable({
     "language": {
         "url": "assets/libs/js/DataTables-1.10.12/extensions/table-spanish.json"
     },
+    "order": [[ 6, "asc" ]],
+
     'columnDefs': [
         {
             "targets": 0, // your case first column
@@ -453,6 +458,27 @@ $(document).ready(function(){
     familiasAll();
 
 
+    
+    $("#costo_form").inputmask("numeric", {
+        radixPoint: ",",
+        groupSeparator: ".",
+        digits: 2,
+        autoGroup: true,
+        //prefix: '$',
+        rightAlign: false,
+        oncleared: function () { self.Value(''); }
+        });
+         
+    $("#sugerido_form").inputmask("numeric", {
+        radixPoint: ",",
+        groupSeparator: ".",
+        digits: 2,
+        autoGroup: true,
+        //prefix: '$',
+        rightAlign: false,
+        oncleared: function () { self.Value(''); }
+        });       
+
     // alta //
     $(document).on("click","#nuevo-prod", function(event){
 
@@ -544,7 +570,15 @@ $(document).ready(function(){
                 url = 'prod/modifcar_stock'; 
                 msj = 'Se modificó con éxito!'; 
             }
-            
+
+            var costo = $('#costo_form').val();
+            var costo = costo.replace('.','');
+            var costo = costo.replace(',','.');
+
+            var sugerido = $('#sugerido_form').val();
+            var sugerido = sugerido.replace('.','');
+            var sugerido = sugerido.replace(',','.');
+
             $.ajax({
             type: "POST",
             url: url,
@@ -559,8 +593,8 @@ $(document).ready(function(){
                 talle: $('#talle_form').val(),
                 color: $('#color_form').val(),
                 aroma: $('#aroma_form').val(),
-                costo: $('#costo_form').val(),
-                sugerido: $('#sugerido_form').val(),
+                costo: costo,
+                sugerido: sugerido,
                 repo: $('#reposicion_form').val(),
                 stock: $('#stock_form').val(),
             },
@@ -600,14 +634,14 @@ $(document).ready(function(){
              med_form: {
                 number: true,
              },
-             costo_form: {
-                required: true,
-                number: true,
-             },
-             sugerido_form: {
-                required: true,
-                number: true,
-             },
+            //  costo_form: {
+            //     required: true,
+            //     number: true,
+            //  },
+            //  sugerido_form: {
+            //     required: true,
+            //     number: true,
+            //  },
              reposicion_form: {
                 required: true,
                 number: true,
@@ -632,14 +666,14 @@ $(document).ready(function(){
               med_form: {
                  number: 'campo numérico',
               },
-              costo_form: {
-                 required: 'campo requerido',
-                 number: 'campo numérico',
-              },
-              sugerido_form: {
-                 required: 'campo requerido',
-                 number: 'campo numérico',
-              },
+            //   costo_form: {
+            //      required: 'campo requerido',
+            //      number: 'campo numérico',
+            //   },
+            //   sugerido_form: {
+            //      required: 'campo requerido',
+            //      number: 'campo numérico',
+            //   },
               reposicion_form: {
                  required: 'campo requerido',
                  number: 'campo numérico',

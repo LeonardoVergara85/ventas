@@ -147,6 +147,26 @@ Table = $('#table_clientes').DataTable({
     clientesAll();
     localidadesAll();
 
+    //CONTADOR DE CARACTERES PARA EL TEXTAREA
+    var limit = 100;
+    $(document).on("input","#observacion_form", function(event){
+        //al cambiar el texto del txt_detalle
+            var init = this.value.length;
+            var total_characters = (limit - init);
+            $('#contadorc').html(total_characters+" caracteres");
+   });
+
+   $("#saldo_form").inputmask("numeric", {
+    radixPoint: ",",
+    groupSeparator: ".",
+    digits: 2,
+    autoGroup: true,
+    prefix: '$',
+    rightAlign: false,
+    oncleared: function () { self.Value(''); }
+    });
+
+
     $(document).on("click","#nuevo_cliente", function(event){
 
          $('#loc_form_add').val('default');
@@ -230,6 +250,8 @@ Table = $('#table_clientes').DataTable({
 
         $('#saldo_form').val('');
         $('#saldo_form').val(0);
+        $('#observacion_form').val('');
+        $('#contadorc').html('100 caracteres');
         $('#saldo_form').removeClass('is-invalid');
          $('#myModalTroquel').modal('show');
 
@@ -240,7 +262,10 @@ Table = $('#table_clientes').DataTable({
     $(document).on("click","#pdftroquel", function(event){    
     
         var saldo = $('#saldo_form').val();
+        var obs = $('#observacion_form').val();
         $('#saldo').val(saldo);
+        $('#observacion').val(obs);
+
         $('#form-pfd').submit();
 
     });

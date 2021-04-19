@@ -94,6 +94,10 @@
 <script src="<?= lib('libs/js/autocomplete.jquery.js') ?>" type="text/javascript"></script>
 <script src="<?= lib('libs/js/jquery-ui-1.12.1.custom/jquery-ui.js') ?>" type="text/javascript"></script>
 
+<!-- InputMask JS-->
+<script src="<?= lib('libs/js/jquery.inputmask-3.x/js/inputmask.js') ?>" type="text/javascript"></script>
+<script src="<?= lib('libs/js/jquery.inputmask-3.x/dist/jquery.inputmask.bundle.js') ?>" type="text/javascript"></script>
+
 <?= $this->section('scripts') ?>
 
 </html>

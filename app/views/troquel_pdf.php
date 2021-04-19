@@ -9,12 +9,13 @@ $apellido = $_POST['apellido'];
 $tel = $_POST['telefono'];
 $domi = $_POST['domicilio'];
 $saldo = $_POST['saldo'];
+$observacion = $_POST['observacion'];
 
 class PDF extends FPDF {
 
     function Header() {
 
-        global $nro,$localidad,$nombre,$apellido,$tel,$domi,$saldo;
+        global $nro,$localidad,$nombre,$apellido,$tel,$domi,$saldo,$observacion;
 
         $this->SetMargins(20, 10);
 
@@ -54,12 +55,29 @@ class PDF extends FPDF {
 
         $this->Cell(90,10,utf8_decode('DIRECCIÓN: '.$domi),0,0,'L');
 
-        $this->Ln(15);
-
-        $this->SetFont('Arial','B',20);
-        $this->Cell(170,12,utf8_decode('SALDO: $ '.$saldo),1,0,'C');
        
-        $this->Ln(25);
+        
+
+        if($observacion != null){
+
+          $this->Ln(15); 
+          $this->Cell(0,9,utf8_decode('Observación:'),0,0,'L');
+          $this->Ln(9); 
+          $this->SetFont('Arial','B',20);
+          $this->MultiCell(0,10,utf8_decode(strtoupper($observacion)), 1, 'L', 0);
+
+        }else{
+
+            $this->Ln(15);
+            $this->SetFont('Arial','B',20);
+            $this->Cell(170,12,utf8_decode('SALDO: '.$saldo),1,0,'C');
+    
+
+        }
+        
+        
+       
+        $this->Ln(20);
 
         $this->SetFont('Arial','B',12);
         $this->Cell(170,8,utf8_decode('JENZO Distribuciones'),0,0,'R');

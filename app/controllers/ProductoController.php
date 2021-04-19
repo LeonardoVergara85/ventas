@@ -239,7 +239,30 @@ class ProductoController extends Controller
 
 		try {
 
-                $resultado->listado = $this->Producto->obtenerProductoSinStockAll();
+                $productos = $this->Producto->obtenerProductoSinStockAll();
+				$lista = array();
+
+				foreach ($productos as $prod) {
+
+					array_push($lista, [
+						'ID' => $prod['ID'],
+						'CODIGO' => $prod['CODIGO'],
+						'DESCRIPCION' => $prod['DESCRIPCION'],
+						'MEDIDA' => $prod['MEDIDA'],
+						'MEDIDA_DESC' => $prod['MEDIDA_DESC'],
+						'TALLES' => $prod['TALLES'],
+						'COLOR' => $prod['COLOR'],
+						'AROMAS' => $prod['AROMAS'],
+						'FAMILIA' => $prod['FAMILIA'],
+						'PRECIO_COSTO' => number_format($prod['PRECIO_COSTO'],0,',','.'),
+						'PRECIO_SUGERIDO' => number_format($prod['PRECIO_SUGERIDO'],0,',','.'),
+						'stock' => $prod['stock'],
+						'punto_reposicion' => $prod['punto_reposicion']
+					]);
+
+				}
+
+			    $resultado->listado = $lista;
                 $resultado->exito = true;
 			
 			//code...
@@ -261,7 +284,31 @@ class ProductoController extends Controller
 
 		try {
 
-                $resultado->listado = $this->Producto->obtenerProductoEliminados();
+                $productos = $this->Producto->obtenerProductoEliminados();
+				$lista = array();
+
+				foreach ($productos as $prod) {
+
+					array_push($lista, [
+						'ID' => $prod['ID'],
+						'CODIGO' => $prod['CODIGO'],
+						'DESCRIPCION' => $prod['DESCRIPCION'],
+						'MEDIDA' => $prod['MEDIDA'],
+						'MEDIDA_DESC' => $prod['MEDIDA_DESC'],
+						'TALLES' => $prod['TALLES'],
+						'COLOR' => $prod['COLOR'],
+						'AROMAS' => $prod['AROMAS'],
+						'FAMILIA' => $prod['FAMILIA'],
+						'FAMILIA_ID' => $prod['FAMILIA_ID'],
+						'PRECIO_COSTO' => number_format($prod['PRECIO_COSTO'],0,',','.'),
+						'PRECIO_SUGERIDO' => number_format($prod['PRECIO_SUGERIDO'],0,',','.'),
+						'stock' => $prod['stock'],
+						'punto_reposicion' => $prod['punto_reposicion'],
+						'fecha_alta' => $prod['fecha_alta']
+					]);
+
+				}
+				$resultado->listado = $lista;
                 $resultado->exito = true;
 			
 			//code...
@@ -284,7 +331,30 @@ class ProductoController extends Controller
 
 		try {
 
-                $resultado->listado = $this->Producto->obtenerProductoStockAll();
+                $productos = $this->Producto->obtenerProductoStockAll();
+				$lista = array();
+
+			foreach ($productos as $prod) {
+
+				array_push($lista, [
+					'ID' => $prod['ID'],
+					'CODIGO' => $prod['CODIGO'],
+					'DESCRIPCION' => $prod['DESCRIPCION'],
+					'MEDIDA' => $prod['MEDIDA'],
+					'MEDIDA_DESC' => $prod['MEDIDA_DESC'],
+					'TALLES' => $prod['TALLES'],
+					'COLOR' => $prod['COLOR'],
+					'AROMAS' => $prod['AROMAS'],
+					'FAMILIA' => $prod['FAMILIA'],
+					'PRECIO_COSTO' => number_format($prod['PRECIO_COSTO'],0,',','.'),
+					'PRECIO_SUGERIDO' => number_format($prod['PRECIO_SUGERIDO'],0,',','.'),
+					'stock' => $prod['stock'],
+					'punto_reposicion' => $prod['punto_reposicion']
+				]);
+
+			}
+
+			    $resultado->listado = $lista;
                 $resultado->exito = true;
 			
 			//code...
