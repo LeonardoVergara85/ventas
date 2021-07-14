@@ -318,7 +318,9 @@ class Producto extends Model
     {
         
         $conexion = Database::DB();
-        $sql = "SELECT distinct fecha_alta, DATE_FORMAT(fecha_alta, '%M %Y') AS fecha FROM producto WHERE fecha_alta <> '0000-00-00'";
+        $sql = "SELECT distinct fecha_alta, DATE_FORMAT(fecha_alta, '%M %Y') AS fecha 
+                FROM producto 
+                WHERE fecha_alta <> '0000-00-00' AND DATE_FORMAT(fecha_alta, '%Y') = DATE_FORMAT(NOW(), '%Y')";
 
        // $consulta = $this->conexion->Prepare($sql);
 
@@ -335,7 +337,9 @@ class Producto extends Model
     {
         
         $conexion = Database::DB();
-        $sql = "SELECT distinct fecha_alta, DATE_FORMAT(fecha_alta, '%M %Y') AS fecha FROM producto where activo = 'N' AND fecha_alta <> '0000-00-00' ";
+        $sql = "SELECT distinct fecha_alta, DATE_FORMAT(fecha_alta, '%M %Y') AS fecha 
+                FROM producto 
+                WHERE fecha_alta <> '0000-00-00' AND DATE_FORMAT(fecha_alta, '%Y') = DATE_FORMAT(NOW(), '%Y')";
 
        // $consulta = $this->conexion->Prepare($sql);
 
